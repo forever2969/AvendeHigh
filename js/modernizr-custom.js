@@ -80,9 +80,16 @@ const addImg = (applyBugX,applyBugY,oneRoomSize,roomSize)=>{
 	//img.style.right= `${parseInt(applyBugX)+parseInt(defaultX)}px`;
 	//console.log(parseInt(document.getElementById("canvasDiv").offsetHeight)/2+ 145);
 	console.log(175+Math.ceil(oneRoomSize*(roomSize/2)));
-	img.style.left = `${(window.innerWidth-(oneRoomSize*2)/3)/2}`+'px';
-	img.style.top = `${175-`${(oneRoomSize*2/3)/2}`+Math.ceil(oneRoomSize*(roomSize/2))}`+'px';
-	
+
+	((roomSize%2 != 0)?
+	img.style.left = `${(window.innerWidth-(oneRoomSize*2)/3)/2}`+'px':
+	img.style.left = `${(window.innerWidth-(oneRoomSize*2)/3)/2 + oneRoomSize/2}`+'px'
+	);
+	((roomSize%2 != 0) ?
+	img.style.top = `${175-`${(oneRoomSize*2/3)/2}`+Math.ceil(oneRoomSize*(roomSize/2))}`+'px' :
+	img.style.top = `${175+parseInt(`${(oneRoomSize*2/3)/4}`)+Math.ceil(oneRoomSize*(roomSize/2))}`+'px'
+	);
+
 	autoMove();
 }
 
