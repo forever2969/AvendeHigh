@@ -13,6 +13,7 @@ const applyRoom = ()=>{
 	for(let i=0; i<roomSize; i++){
 		checkRoom[i] = 0;
 	}
+	console.log(window.innerWidth);
 	printRoom(roomSize);
 }
 
@@ -61,11 +62,11 @@ const bugLocation = (roomSize)=>{
 	const applyBugY = bugPosY*multiNum;
 	const oneRoomSize = canvasSize/roomSize;
 
-	addImg(applyBugX,applyBugY,oneRoomSize);
+	addImg(applyBugX,applyBugY,oneRoomSize,roomSize);
 }
 // 좌표는 정보는 구했고, 각 좌표에 맞게 딱정벌레 load해야함
 
-const addImg = (applyBugX,applyBugY,oneRoomSize)=>{
+const addImg = (applyBugX,applyBugY,oneRoomSize,roomSize)=>{
 	const img = document.getElementById('bug');
 	const imgDiv = document.getElementById('bugDiv');
 	console.log(roomSize);
@@ -74,37 +75,41 @@ const addImg = (applyBugX,applyBugY,oneRoomSize)=>{
 	imgDiv.setAttribute('height',`${oneRoomSize}`);
 	img.setAttribute('width',`${(`${oneRoomSize}`*2)/3}`);
 	img.setAttribute('height',`${(`${oneRoomSize}`*2)/3}`);	
-
-	img.style.bottom= `${parseInt(applyBugY)+parseInt(defaultY)}px`;
-	img.style.right= `${parseInt(applyBugX)+parseInt(defaultX)}px`;
-
+	console.log((oneRoomSize));
+	//img.style.bottom= `${parseInt(applyBugY)+parseInt(defaultY)}px`;
+	//img.style.right= `${parseInt(applyBugX)+parseInt(defaultX)}px`;
+	//console.log(parseInt(document.getElementById("canvasDiv").offsetHeight)/2+ 145);
+	console.log(175+Math.ceil(oneRoomSize*(roomSize/2)));
+	img.style.left = `${(window.innerWidth-(oneRoomSize*2)/3)/2}`+'px';
+	img.style.top = `${175-`${(oneRoomSize*2/3)/2}`+Math.ceil(oneRoomSize*(roomSize/2))}`+'px';
+	
 	autoMove();
 }
 
-const autoMove = ()=>{
+// const autoMove = ()=>{
 
-	while(checkRoom)
-	const img = document.getElementById('bug');
-	let currentImgX = img.style.bottom;
-	let currentImgY = img.style.right;
-	//랜덤값 8까지 받아서 if문으로 움직임 처리
-	let direction = Math.floor(Math.random(8));
+// 	while(checkRoom)
+// 	const img = document.getElementById('bug');
+// 	let currentImgX = img.style.bottom;
+// 	let currentImgY = img.style.right;
+// 	//랜덤값 8까지 받아서 if문으로 움직임 처리
+// 	let direction = Math.floor(Math.random(8));
 
-	if(direction === 0){ //위
-		img.style.bottom= '' //현재위치 받아와야함
-	}else if(direction === 1){ //아래
+// 	if(direction === 0){ //위
+// 		img.style.bottom= '' //현재위치 받아와야함
+// 	}else if(direction === 1){ //아래
 
-	}else if(direction === 2){ //좌
+// 	}else if(direction === 2){ //좌
 
-	}else if(direction === 3){ //우
+// 	}else if(direction === 3){ //우
 
-	}else if(direction === 4){ //왼위
+// 	}else if(direction === 4){ //왼위
 
-	}else if(direction === 5){ //왼아
+// 	}else if(direction === 5){ //왼아
 
-	}else if(direction === 6){ //오위
+// 	}else if(direction === 6){ //오위
 
-	}else{ //오아
+// 	}else{ //오아
 
-	}
-}
+// 	}
+// }
