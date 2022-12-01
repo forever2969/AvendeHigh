@@ -1,0 +1,17 @@
+#inputRoom {
+  text-align: center;
+  margin-top: 100px;
+}
+#canvasDiv {
+  margin: 0 auto;
+  padding: 30px 150px;
+  text-align: center;
+  position: absolute;
+  z-index: -1;
+}
+#bugDiv {
+  overflow: hidden;
+}
+#bug {
+  position: absolute;
+}
