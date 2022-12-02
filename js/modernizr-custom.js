@@ -3,16 +3,11 @@ if (canvas.getContext) {
 	console.log('캔버스 지원');
 }
 const canvasSize = 500;
-const defaultX = 820;
-const defaultY = 20;
 
 const applyRoom = ()=>{
 	const roomSize = document.getElementById('roomSize').value;
+	localStorage.setItem('roomSize',roomSize);
 	console.log(roomSize);
-	const checkRoom = new Array(roomSize);
-	for(let i=0; i<roomSize; i++){
-		checkRoom[i] = 0;
-	}
 	console.log(window.innerWidth);
 	printRoom(roomSize);
 }
@@ -60,13 +55,14 @@ const bugLocation = (roomSize)=>{
 
 	const applyBugX = bugPosX*multiNum;
 	const applyBugY = bugPosY*multiNum;
+
 	const oneRoomSize = canvasSize/roomSize;
 
-	addImg(applyBugX,applyBugY,oneRoomSize,roomSize);
+	addImg(oneRoomSize,roomSize);
 }
 // 좌표는 정보는 구했고, 각 좌표에 맞게 딱정벌레 load해야함
 
-const addImg = (applyBugX,applyBugY,oneRoomSize,roomSize)=>{
+const addImg = (oneRoomSize,roomSize)=>{
 	const img = document.getElementById('bug');
 	const imgDiv = document.getElementById('bugDiv');
 	console.log(roomSize);
@@ -90,33 +86,62 @@ const addImg = (applyBugX,applyBugY,oneRoomSize,roomSize)=>{
 	img.style.top = `${175+parseInt(`${(oneRoomSize*2/3)/4}`)+Math.ceil(oneRoomSize*(roomSize/2))}`+'px'
 	);
 
-	autoMove();
 }
 
-// const autoMove = ()=>{
+const autoMove = ()=>{
+	const roomSize = localStorage.getItem('roomSize');
+	const checkRoom = new Array(roomSize);
+	for(let i=0; i<roomSize; i++){
+		checkRoom[i] = 0;
+	}
+	const oneRoomSize = canvasSize/roomSize;
+	const img = document.getElementById("bug");
 
-// 	while(checkRoom)
-// 	const img = document.getElementById('bug');
-// 	let currentImgX = img.style.bottom;
-// 	let currentImgY = img.style.right;
-// 	//랜덤값 8까지 받아서 if문으로 움직임 처리
-// 	let direction = Math.floor(Math.random(8));
+	while(checkRoom){
+		let bugPosX = (img.style.left).slice(0,(img.style.left).length-2);
+		let bugPosY = (img.style.top).slice(0,(img.style.top).length-2);
+		
+		//랜덤값 8까지 받아서 if문으로 움직임 처리
+		let direction = Math.floor(Math.random() * 8);
 
-// 	if(direction === 0){ //위
-// 		img.style.bottom= '' //현재위치 받아와야함
-// 	}else if(direction === 1){ //아래
-
-// 	}else if(direction === 2){ //좌
-
-// 	}else if(direction === 3){ //우
-
-// 	}else if(direction === 4){ //왼위
-
-// 	}else if(direction === 5){ //왼아
-
-// 	}else if(direction === 6){ //오위
-
-// 	}else{ //오아
-
-// 	}
-// }
+		if(direction === 0){ //위
+			console.log("위");
+			img.style.top = parseInt(bugPosY - oneRoomSize)+"px";
+			break;
+		}else if(direction === 1){ //아래
+			console.log("아래");
+			img.style.top = parseInt(parseInt(bugPosY) + oneRoomSize) + "px";
+			break;
+		}else if(direction === 2){ //좌
+			console.log("좌");
+			img.style.left = parseInt(bugPosX - oneRoomSize) + "px";
+			break;
+		}else if(direction === 3){ //우
+			console.log("우");
+			console.log(bugPosX);
+			img.style.left = parseInt(parseInt(bugPosX) + oneRoomSize) + "px";
+			break;
+		}else if(direction === 4){ //왼위
+			console.log("왼위");
+			img.style.top = parseInt(bugPosY - oneRoomSize) + "px";
+			img.style.left = parseInt(bugPosX - oneRoomSize) + "px";
+			break;
+		}else if(direction === 5){ //왼아
+			console.log("왼아");
+			img.style.top = parseInt(bugPosY - oneRoomSize) + "px";
+			img.style.left = parseInt(parseInt(bugPosX) + oneRoomSize) + "px";
+			break;
+		}else if(direction === 6){ //오위
+			console.log("오위");
+			img.style.top = parseInt(parseInt(bugPosY) + oneRoomSize) + "px";
+			img.style.left = parseInt(bugPosX - oneRoomSize) + "px";
+			break;
+		}else{ //오아
+			console.log("오아");
+			img.style.top = parseInt(parseInt(bugPosY) + oneRoomSize) + "px";
+			img.style.left = parseInt(parseInt(bugPosX) + oneRoomSize) + "px";
+			break;
+		}
+	}
+	
+}
